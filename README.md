@@ -1,4 +1,4 @@
-# Data Science Digital Library
+# Data-Science-Digital-Library
 
 A standalone student learning library for exploring data science coursework in a browser.
 
