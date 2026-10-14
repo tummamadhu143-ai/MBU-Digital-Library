@@ -1,10 +1,12 @@
-# Data-Science-Digital-Library
+# MBU-Digital-Library
+
+## Data Science Digital Library
 
 A standalone student learning library for exploring data science coursework in a browser.
 
 ## Open the library
 
-Open `index.html` in a browser. The home dashboard links to five learning modules, lab assignments, study tools, learning resources, and a demo AI assistant.
+Open `index.html` in a browser. The student dashboard links to five learning modules, lab experiments, projects, study tools, learning resources, and a demo AI assistant.
 
 ## Presentation notebooks
 
@@ -14,4 +16,4 @@ Module 2 also includes the 54-page **Tools For Data Science** notebook, the orig
 
 ## Student project links
 
-Lab assignments link to GitHub repositories. The demo library runs locally in the browser and does not include a server-side login or AI service.
+GitHub-linked projects are managed under Projects. Experiment files added under Lab Experiments are stored locally in the current browser. The demo library does not include a server-side login or AI service.
