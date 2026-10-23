@@ -25,3 +25,9 @@ Module 2 also includes the 54-page **Tools For Data Science** notebook, the orig
 ## Student project links
 
 GitHub-linked projects are managed under Projects. Experiment files added under Lab Experiments are stored locally in the current browser and are not uploaded to the public website. The demo library does not include a server-side login or AI service.
+
+## Live Python compiler
+
+The Projects section contains an in-browser Python editor with runnable examples for data formats, API-shaped data and SQLite, data cleaning, wrangling, visualization summaries, time series, aggregation, review analysis, and customer/emotion case studies. Select an example, edit the code, and choose **Run Python**. Python runs locally in a Web Worker through Pyodide; the first run downloads the runtime plus NumPy, pandas, and SQLite support from the public CDN, so an internet connection is required. Code and output are not uploaded by the library.
+
+The review-analysis example uses sample text and does not scrape Amazon. Use an approved API or licensed dataset for product reviews. The example emotion classifier is rule-based; it is not a trained model.
