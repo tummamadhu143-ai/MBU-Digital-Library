@@ -16,6 +16,8 @@ The workflow publishes the static site and its course materials whenever changes
 
 Open `index.html` in a browser. The student dashboard links to five learning modules, lab experiments, projects, study tools, learning resources, and a demo AI assistant.
 
+The Assignments section includes the Module 1, Module 2, and Module 3 assignment PDFs. Open an assignment in the single-page notebook reader to turn through one sheet at a time, or download its PDF.
+
 ## Presentation notebooks
 
 Module 1 and Module 2 include two-page, animated notebooks generated from their original PowerPoint presentations. The source presentations are kept in each module's `source-presentations` folder; the notebook page images are alongside them in the module folder.

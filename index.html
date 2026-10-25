@@ -62,21 +62,30 @@
     .flipbook-stage{display:flex;align-items:center;justify-content:center;gap:12px;padding:22px 0}
     .notebook-spread{position:relative;display:grid;width:min(100%,1120px);grid-template-columns:1fr 1fr;overflow:hidden;border:1px solid #dcd8cf;border-radius:7px;background:#eeeae2;box-shadow:0 16px 38px rgba(36,38,73,.17);perspective:1600px}
     .notebook-spread:after{position:absolute;z-index:2;top:0;bottom:0;left:50%;width:22px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(42,35,23,.08),rgba(255,255,255,.35) 45%,rgba(42,35,23,.12));content:"";pointer-events:none}
+    .notebook-spread.single-page{width:min(100%,760px);grid-template-columns:minmax(0,1fr)}
+    .notebook-spread.single-page:after{display:none}
+    .notebook-spread.single-page .notebook-leaf:first-child{padding-right:14px;border-right:0}
+    .notebook-spread.single-page .notebook-leaf:last-child{display:none}
+    .notebook-spread.single-page .notebook-turn-page{right:0;left:0;width:100%}
     .notebook-leaf{position:relative;display:flex;min-width:0;min-height:220px;flex-direction:column;padding:14px 14px 10px;background:repeating-linear-gradient(180deg,#fffefa 0,#fffefa 31px,#e9edf4 32px);transform-origin:center}
     .notebook-leaf:first-child{padding-right:20px;border-right:1px solid #e2ded5}
     .notebook-leaf:last-child{padding-left:20px}
     .notebook-leaf img{display:block;width:100%;height:auto;aspect-ratio:16/9;align-self:center;object-fit:contain;border:1px solid #e8e5df;background:#fff}
+    .notebook-leaf img.assignment-page{aspect-ratio:3/4}
     .notebook-leaf.is-empty{justify-content:center;align-items:center;color:#a4a0aa;font-size:12px}
     .notebook-leaf.is-empty img{display:none}
     .notebook-page-number{display:flex;justify-content:space-between;margin-top:auto;padding:9px 3px 0;color:#8e8b85;font-size:10px}
     .notebook-turn-page{position:absolute;z-index:3;top:0;bottom:0;width:50%;transform-style:preserve-3d;animation-duration:.72s;animation-timing-function:ease-in-out;animation-fill-mode:forwards}
     .notebook-turn-page.forward{right:0;transform-origin:left center;animation-name:turnPageForward}
     .notebook-turn-page.backward{left:0;transform-origin:right center;animation-name:turnPageBackward}
+    .notebook-spread.single-page .notebook-turn-page.forward{transform-origin:left center}
+    .notebook-spread.single-page .notebook-turn-page.backward{transform-origin:right center}
     .notebook-page-face{position:absolute;inset:0;overflow:hidden;padding:14px 14px 10px;background:repeating-linear-gradient(180deg,#fffefa 0,#fffefa 31px,#e9edf4 32px);backface-visibility:hidden}
     .notebook-page-face.front{box-shadow:inset 1px 0 rgba(58,47,30,.12)}
     .notebook-page-face.back{transform:rotateY(180deg);box-shadow:inset -1px 0 rgba(58,47,30,.12)}
     .notebook-turn-page.backward .notebook-page-face.back{transform:rotateY(-180deg)}
     .notebook-page-face img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border:1px solid #e8e5df;background:#fff}
+    .notebook-page-face img.assignment-page{aspect-ratio:3/4}
     @keyframes turnPageForward{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
     @keyframes turnPageBackward{from{transform:rotateY(0)}to{transform:rotateY(180deg)}}
     .flipbook-arrow{display:grid;width:38px;height:38px;flex:0 0 auto;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--primary);background:#fff;font-size:20px}
@@ -118,6 +127,11 @@
       {title:"Data Collection & Preparation",description:"Acquire, clean, transform, and prepare datasets.",tag:"Data handling"},
       {title:"Exploratory Data Analysis & Visualization",description:"Discover patterns with statistics and visual storytelling.",tag:"Analysis"},
       {title:"Machine Learning Fundamentals",description:"Build, evaluate, and improve introductory ML models.",tag:"Machine learning"}
+    ];
+    const assignments=[
+      {module:1,title:"Module 1 Assignment",file:"module-1-assignment.pdf",slug:"module-1",slides:2},
+      {module:2,title:"Module 2 Assignment",file:"module-2-assignment.pdf",slug:"module-2",slides:3},
+      {module:3,title:"Module 3 Assignment",file:"module-3-assignment.pdf",slug:"module-3",slides:3}
     ];
     const tools=[
       {icon:"🐍",title:"Python & Jupyter",description:"Write code and explore datasets in notebooks.",url:"https://jupyter.org/"},
@@ -561,33 +575,51 @@ return worker;
         }
       });
     }
-    const getActiveDecks=()=>activeModuleNumber===2?moduleTwoDecks:moduleOneDecks;
+    const getActiveDecks=()=>activeModuleNumber===0?assignments:activeModuleNumber===2?moduleTwoDecks:moduleOneDecks;
+    const assignmentPageImage=(assignment,page)=>`assignments/${assignment.slug}/Slide ${page}.jpg`;
+    function setNotebookPage(pageId,source,title,isAssignment){
+      const current=document.getElementById(pageId);
+      const page=current instanceof HTMLImageElement?current:document.createElement("img");
+      page.id=pageId;
+      page.src=source;
+      page.alt=title;
+      page.classList.toggle("assignment-page",isAssignment);
+      if(page!==current)current.replaceWith(page);
+    }
     function renderFlipPage(){
       const deck=getActiveDecks()[activeDeckIndex];
       if(!deck)return;
-      const leftPage=document.getElementById("leftNotebookPage");
-      const rightPage=document.getElementById("rightNotebookPage");
-      leftPage.src=`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${activeSlide+1}.PNG`;
-      leftPage.alt=`${deck.title}, page ${activeSlide+1}`;
+      const isAssignment=activeModuleNumber===0;
+      const leftPageUrl=isAssignment?assignmentPageImage(deck,activeSlide+1):`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${activeSlide+1}.PNG`;
+      setNotebookPage("leftNotebookPage",leftPageUrl,`${deck.title}, page ${activeSlide+1}`,isAssignment);
       document.getElementById("leftPageNumber").textContent=`${activeSlide+1}`;
-      document.querySelectorAll(".notebook-page-label").forEach((label)=>label.textContent=`DATA SCIENCE · MODULE ${activeModuleNumber}`);
+      document.querySelectorAll(".notebook-page-label").forEach((label)=>label.textContent=isAssignment?`DATA SCIENCE · MODULE ${deck.module} ASSIGNMENT`:`DATA SCIENCE · MODULE ${activeModuleNumber}`);
+      const spread=document.getElementById("notebookSpread");
+      spread.classList.toggle("single-page",isAssignment);
       const rightSlide=activeSlide+2;
       const rightLeaf=document.getElementById("rightNotebookLeaf");
       rightLeaf.classList.toggle("is-empty",rightSlide>deck.slides);
-      if(rightSlide<=deck.slides){
-        rightPage.src=`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${rightSlide}.PNG`;
-        rightPage.alt=`${deck.title}, page ${rightSlide}`;
+      if(!isAssignment&&rightSlide<=deck.slides){
+        const rightPageUrl=isAssignment?assignmentPageImage(deck,rightSlide):`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${rightSlide}.PNG`;
+        setNotebookPage("rightNotebookPage",rightPageUrl,`${deck.title}, page ${rightSlide}`,isAssignment);
       }else{
-        rightPage.removeAttribute("src");
-        rightPage.alt="";
+        const pageElement=rightLeaf.querySelector("img");
+        pageElement.removeAttribute("src");
+        if(pageElement instanceof HTMLImageElement)pageElement.alt="";
       }
       document.getElementById("rightPageNumber").textContent=rightSlide<=deck.slides?`${rightSlide}`:"";
       document.getElementById("flipbookTitle").textContent=deck.title;
-      document.getElementById("flipbookCount").textContent=rightSlide<=deck.slides?`Pages ${activeSlide+1}–${rightSlide} of ${deck.slides}`:`Page ${activeSlide+1} of ${deck.slides}`;
+      document.getElementById("flipbookCount").textContent=!isAssignment&&rightSlide<=deck.slides?`Pages ${activeSlide+1}–${rightSlide} of ${deck.slides}`:`Page ${activeSlide+1} of ${deck.slides}`;
       document.getElementById("previousSlide").disabled=activeSlide===0;
-      document.getElementById("nextSlide").disabled=rightSlide>=deck.slides;
+      document.getElementById("nextSlide").disabled=isAssignment?activeSlide+1>=deck.slides:rightSlide>=deck.slides;
       document.getElementById("previousSlideButton").disabled=activeSlide===0;
-      document.getElementById("nextSlideButton").disabled=rightSlide>=deck.slides;
+      document.getElementById("nextSlideButton").disabled=isAssignment?activeSlide+1>=deck.slides:rightSlide>=deck.slides;
+      document.getElementById("previousSlide").setAttribute("aria-label",isAssignment?"Previous page":"Previous spread");
+      document.getElementById("nextSlide").setAttribute("aria-label",isAssignment?"Next page":"Next spread");
+      document.getElementById("previousSlide").textContent="‹";
+      document.getElementById("nextSlide").textContent="›";
+      document.getElementById("previousSlideButton").textContent=isAssignment?"← Previous page":"← Previous spread";
+      document.getElementById("nextSlideButton").textContent=isAssignment?"Next page →":"Next spread →";
     }
     function openFlipbook(index){
       const selectedDecks=getActiveDecks();
@@ -598,26 +630,32 @@ return worker;
       renderFlipPage();
       document.getElementById("flipbookViewer").scrollIntoView({behavior:"smooth",block:"start"});
     }
+    function openAssignment(index){
+      if(!Number.isInteger(index)||index<0||index>=assignments.length)return;
+      activeModuleNumber=0;
+      openFlipbook(index);
+    }
     function turnFlipbookPage(direction){
       const deck=getActiveDecks()[activeDeckIndex];
       const spread=document.getElementById("notebookSpread");
       if(!deck||spread.querySelector(".notebook-turn-page"))return;
-      const nextSlide=Math.max(0,Math.min(Math.floor((deck.slides-1)/2)*2,activeSlide+direction*2));
+      const isAssignment=activeModuleNumber===0;
+      const slideStep=isAssignment?1:2;
+      const lastSlide=isAssignment?deck.slides-1:Math.floor((deck.slides-1)/2)*2;
+      const nextSlide=Math.max(0,Math.min(lastSlide,activeSlide+direction*slideStep));
       if(nextSlide===activeSlide)return;
       const turningForward=direction>0;
       const turnPage=document.createElement("div");
       turnPage.className=`notebook-turn-page ${turningForward?"forward":"backward"}`;
-      const frontImage=document.createElement("img");
-      const backImage=document.createElement("img");
-      const currentPage=activeSlide+(turningForward?2:1);
-      const revealedPage=turningForward?nextSlide+1:activeSlide;
-      frontImage.src=`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${currentPage}.PNG`;
-      frontImage.alt="";
-      backImage.src=`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${revealedPage}.PNG`;
-      backImage.alt="";
-      for(const [side,image] of [["front",frontImage],["back",backImage]]){
+      const currentPage=isAssignment?activeSlide+1:activeSlide+(turningForward?2:1);
+      const revealedPage=isAssignment?nextSlide+1:turningForward?nextSlide+1:activeSlide;
+      for(const [side,pageNumber] of [["front",currentPage],["back",revealedPage]]){
         const face=document.createElement("div");
         face.className=`notebook-page-face ${side}`;
+        const image=document.createElement("img");
+        image.src=isAssignment?assignmentPageImage(deck,pageNumber):`modules/module-${activeModuleNumber}/${deck.slug}/Slide ${pageNumber}.PNG`;
+        image.alt="";
+        image.classList.toggle("assignment-page",isAssignment);
         face.appendChild(image);
         turnPage.appendChild(face);
       }
@@ -654,10 +692,10 @@ return worker;
       }else if(page==="projects"){
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Interactive learning</span><h1>Projects</h1><p>Run and edit your data science experiments in the live Python compiler.</p></div></div><section class="card compiler-card"><div class="compiler-toolbar"><div class="field"><label for="pythonExperiment">Choose an experiment</label><select id="pythonExperiment">${pythonExperiments.map((experiment,index)=>`<option value="${index}">${escapeHtml(experiment.title)}</option>`).join("")}</select></div><div class="compiler-actions"><span class="compiler-status" id="pythonStatus" aria-live="polite">First run loads Python, NumPy, pandas, and SQLite (internet required).</span><button class="primary-button" id="runPythonButton" type="button">▶ Run Python</button></div></div><label class="eyebrow" for="pythonEditor">Python code</label><textarea class="compiler-editor" id="pythonEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code editor">${escapeHtml(pythonExperiments[0].code)}</textarea><div class="compiler-actions" style="justify-content:flex-end;margin-top:12px"><button class="text-button" id="resetPythonButton" type="button">Reset example</button></div><pre class="compiler-output" id="pythonOutput" aria-label="Python output" aria-live="polite">Select Run Python to execute this example.</pre><p class="compiler-note">Python runs in your browser. The runtime and data-science packages are downloaded from the public Pyodide CDN on the first run. Code and output stay in this browser; this is a learning compiler, not a full server-backed notebook.</p></section>`;
         bindPythonCompiler();
-      }else if(page==="assignments"||page==="quizzes"){
-        const isQuizPage=page==="quizzes";
-        const sectionTitle=isQuizPage?"Quizzes & Tests":"Assignments";
-        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Coursework</span><h1>${sectionTitle}</h1><p>${isQuizPage?"Review quizzes and tests for your data science modules.":"Keep track of coursework for your data science modules."}</p></div></div><section class="card empty-state"><strong>${isQuizPage?"No quizzes or tests yet":"No assignments yet"}</strong><p>${isQuizPage?"Quizzes and tests will appear here when they are added to the library.":"Assignments will appear here when they are added to the library."}</p><button class="primary-button" data-goto="modules">Browse modules</button></section>`;
+      }else if(page==="assignments"){
+        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Coursework</span><h1>Assignments</h1><p>Open or download assignment PDFs for your data science modules.</p></div></div><div class="flipbook-decks">${assignments.map((assignment,index)=>`<article class="card flipbook-deck"><div class="flipbook-icon" aria-hidden="true">▤</div><h2>${escapeHtml(assignment.title)}</h2><p>${assignment.slides} pages · PDF</p><button class="primary-button" data-assignment-index="${index}">Open notebook</button><div class="flipbook-source-links"><a class="text-button" href="assignments/${escapeHtml(assignment.file)}" download>Download PDF</a></div></article>`).join("")}</div><section class="card flipbook-viewer" id="flipbookViewer" hidden><div class="flipbook-toolbar"><strong id="flipbookTitle"></strong><button class="text-button" data-close-flipbook>Choose another assignment</button></div><div class="flipbook-stage"><button class="flipbook-arrow" id="previousSlide" data-flip="-1" aria-label="Previous spread">‹</button><div class="notebook-spread" id="notebookSpread"><div class="notebook-leaf"><img id="leftNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · ASSIGNMENT</span><span id="leftPageNumber"></span></span></div><div class="notebook-leaf" id="rightNotebookLeaf"><img id="rightNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · ASSIGNMENT</span><span id="rightPageNumber"></span></span></div></div><button class="flipbook-arrow" id="nextSlide" data-flip="1" aria-label="Next spread">›</button></div><div class="flipbook-controls"><button class="primary-button" id="previousSlideButton" data-flip="-1">← Previous spread</button><span class="flipbook-count" id="flipbookCount" aria-live="polite"></span><button class="primary-button" id="nextSlideButton" data-flip="1">Next spread →</button></div></section>`;
+      }else if(page==="quizzes"){
+        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Coursework</span><h1>Quizzes &amp; Tests</h1><p>Review quizzes and tests for your data science modules.</p></div></div><section class="card empty-state"><strong>No quizzes or tests yet</strong><p>Quizzes and tests will appear here when they are added to the library.</p><button class="primary-button" data-goto="modules">Browse modules</button></section>`;
       }else if(page==="tools"){
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Your toolkit</span><h1>Data science tools</h1><p>Handy platforms and libraries for learning, analysis, and building projects.</p></div></div><div class="cards-grid">${tools.map((tool)=>`<article class="card content-card"><div class="tool-icon">${tool.icon}</div><h3>${escapeHtml(tool.title)}</h3><p>${escapeHtml(tool.description)}</p><a class="text-button" href="${escapeHtml(tool.url)}" target="_blank" rel="noopener noreferrer">Explore tool ↗</a></article>`).join("")}</div>`;
       }else if(page==="resources"||page==="references"){
@@ -701,10 +739,11 @@ return worker;
         }
         return;
       }
-      const target=event.target.closest("[data-goto],[data-deck-index],[data-flip],[data-close-flipbook]");
+      const target=event.target.closest("[data-goto],[data-deck-index],[data-assignment-index],[data-flip],[data-close-flipbook]");
       if(!target)return;
       if(target.hasAttribute("data-goto"))setPage(target.dataset.goto);
       else if(target.hasAttribute("data-deck-index"))openFlipbook(Number(target.dataset.deckIndex));
+      else if(target.hasAttribute("data-assignment-index"))openAssignment(Number(target.dataset.assignmentIndex));
       else if(target.hasAttribute("data-flip"))turnFlipbookPage(Number(target.dataset.flip));
       else document.getElementById("flipbookViewer").hidden=true;
     });
