@@ -26,10 +26,18 @@ Module 2 also includes the 54-page **Tools For Data Science** notebook, the orig
 
 ## Student project links
 
-GitHub-linked projects are managed under Projects. Experiment files added under Lab Experiments are stored locally in the current browser and are not uploaded to the public website. The demo library does not include a server-side login or AI service.
+GitHub-linked projects are managed under Projects. Experiment files added under Lab Experiments are stored locally in the current browser and are not uploaded to the public website.
 
 ## Live Python compiler
 
-The Projects section contains an in-browser Python editor with runnable examples for data formats, API-shaped data and SQLite, data cleaning, wrangling, visualization summaries, time series, aggregation, review analysis, and customer/emotion case studies. Select an example, edit the code, and choose **Run Python**. Python runs locally in a Web Worker through Pyodide; the first run downloads the runtime plus NumPy, pandas, and SQLite support from the public CDN, so an internet connection is required. Code and output are not uploaded by the library.
+The Projects section includes ten Data Science experiments, each divided into A, B, and C sections, with the original DOCX available to download. Choose an experiment and section to load its starter program into the in-browser Python editor, edit it, and choose **Run Python**. The earlier quick examples remain available in the same selector. Python runs locally in a Web Worker through Pyodide; the first run downloads the runtime and required packages from the public CDN, so an internet connection is required. Code and output are not uploaded by the library. Experiment 8 uses local sample HTML and sample reviews; it does not scrape Amazon or contact websites.
 
 The review-analysis example uses sample text and does not scrape Amazon. Use an approved API or licensed dataset for product reviews. The example emotion classifier is rule-based; it is not a trained model.
+
+## AI study assistant
+
+The AI model section sends conversation messages to the OpenAI API through the serverless function in `api/chat.js`. The API key is read only from the backend's `OPENAI_API_KEY` environment variable; never put the key in `index.html`, client-side code, or a public repository.
+
+To enable live answers, deploy this repository to Vercel and add `OPENAI_API_KEY` in the Vercel project's server-side environment variables, then redeploy. The default model is `gpt-4o-mini`; set `OPENAI_MODEL` to another model available to your OpenAI project if desired. Set `ALLOWED_ORIGINS` to a comma-separated list of trusted site origins, including `https://tummamadhu143-ai.github.io` when using GitHub Pages. To keep the current GitHub Pages site, set the `ai-api-url` meta tag in `index.html` to the deployed function URL, for example `https://your-vercel-deployment.vercel.app/api/chat`. If you serve the whole site from Vercel, the chat uses `/api/chat` automatically.
+
+The chat is a public endpoint with no user sign-in. CORS restricts browser access to the configured site origins but does not prevent direct API requests. Configure usage limits and billing alerts in OpenAI, and consider adding a persistent rate limiter or authentication before sharing the endpoint widely. Chat messages are sent to OpenAI to generate responses; do not enter private or sensitive information. The API key is not sent to the browser.

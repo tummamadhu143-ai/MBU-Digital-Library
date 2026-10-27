@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#17101f">
+  <meta name="ai-api-url" content="">
   <title>Data Science Digital Library</title>
   <style>
     :root{color-scheme:dark;--ink:#f5eef8;--muted:#b9aabd;--line:#44314f;--paper:#23172d;--canvas:#17101f;--primary:#e34cae;--primary-dark:#c53891;--purple-soft:#382044;--mint:#30203b;--peach:#3d2238;--blue:#28223f;--olive:#e27ab8;--shadow:0 20px 60px rgba(0,0,0,.28);font-family:Inter,"Segoe UI",Arial,sans-serif}
@@ -19,11 +20,13 @@
     .dashboard-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(245px,.9fr);gap:17px}.module-list{display:grid;gap:10px}.module-row{display:flex;align-items:center;gap:14px;padding:14px}.module-number{display:grid;width:38px;height:38px;flex:0 0 auto;place-items:center;border-radius:11px;color:var(--primary);background:var(--purple-soft);font-size:12px;font-weight:800}.module-row:nth-child(2) .module-number{color:#dc72b3;background:var(--mint)}.module-row:nth-child(3) .module-number{color:#e394c4;background:var(--peach)}.module-row:nth-child(4) .module-number{color:#b99ce2;background:var(--blue)}.module-info{min-width:0;flex:1}.module-info strong{display:block;margin-bottom:4px;font-size:13px}.module-info span{color:var(--muted);font-size:11px}.module-tag{padding:6px 8px;border-radius:20px;color:var(--olive);background:var(--mint);font-size:10px;font-weight:700;white-space:nowrap}
     .profile-card{padding:20px}.profile-head{display:flex;align-items:center;gap:13px;padding-bottom:17px;border-bottom:1px solid var(--line)}.profile-head .avatar{width:47px;height:47px;font-size:14px}.profile-head strong{display:block;margin-bottom:4px;font-size:14px}.profile-head span{color:var(--muted);font-size:11px}.faculty-profile-head .avatar{width:64px;height:64px;flex:0 0 auto;border-radius:10px}.faculty-profile-head .avatar img{width:100%;height:100%;object-fit:cover}.profile-data{display:grid;gap:14px;padding:17px 0}.profile-item span{display:block;margin-bottom:4px;color:var(--muted);font-size:10px}.profile-item strong{font-size:12px;font-weight:650}.profile-card .primary-button{width:100%;min-height:39px;font-size:12px}
     .profile-sections{display:grid;gap:16px}.profile-section{padding:20px}.profile-section h2{margin:0 0 16px;font-size:15px}.profile-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0}.profile-detail{min-width:0;padding:13px 14px;border:1px solid #69425f;border-radius:12px;background:linear-gradient(135deg,#35203d,#2b1d35)}.profile-detail:nth-child(6n+2){border-color:#594b82;background:linear-gradient(135deg,#302743,#262038)}.profile-detail:nth-child(6n+3){border-color:#75495f;background:linear-gradient(135deg,#3d2337,#30202f)}.profile-detail:nth-child(6n+4){border-color:#665080;background:linear-gradient(135deg,#34243f,#282039)}.profile-detail:nth-child(6n+5){border-color:#784d70;background:linear-gradient(135deg,#3c2440,#302038)}.profile-detail:nth-child(6n){border-color:#514e7c;background:linear-gradient(135deg,#2d2940,#252036)}.profile-detail dt{margin-bottom:7px;color:#d2b4d0;font-size:10px}.profile-detail:nth-child(6n+2) dt{color:#c0b2eb}.profile-detail:nth-child(6n+3) dt{color:#e3a6c6}.profile-detail:nth-child(6n+4) dt{color:#cbb5e5}.profile-detail:nth-child(6n+5) dt{color:#e2b0d5}.profile-detail:nth-child(6n) dt{color:#bcbce9}.profile-detail dd{margin:0;overflow-wrap:anywhere;font-size:12px;font-weight:650;line-height:1.5}.profile-status{display:inline-flex;align-items:center;gap:7px}.profile-status:before{width:7px;height:7px;border-radius:50%;background:#6ad3a0;content:""}
-    .cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.content-card{padding:19px}.content-card h3{margin:14px 0 7px;font-size:15px}.content-card p{min-height:37px;margin:0 0 17px;color:var(--muted);font-size:12px;line-height:1.6}.card-kicker{color:var(--primary);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.module-card{min-height:176px}.module-card:nth-child(2) .module-number{color:#188362;background:var(--mint)}.module-card:nth-child(3) .module-number{color:#bd6c30;background:var(--peach)}.module-card:nth-child(4) .module-number{color:#3979c5;background:var(--blue)}.module-card:nth-child(5) .module-number{color:#c34d75;background:#ffedf3}    .module-card .module-number{margin-bottom:14px}.progress-track{height:5px;overflow:hidden;border-radius:8px;background:#3a3038}.progress-track span{display:block;height:100%;border-radius:inherit;background:var(--primary)}
-    .form-card{max-width:690px;padding:23px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.form-grid .field{margin:8px 0 12px}.project-list{display:grid;gap:12px;margin-top:19px}.project-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px}.project-row h3{margin:0 0 5px;font-size:13px}.project-row p{margin:0;color:var(--muted);font-size:11px}.project-row a{flex:0 0 auto;color:var(--primary);font-size:11px;font-weight:750;text-decoration:none}.compiler-card{margin-top:29px;padding:20px}.compiler-toolbar{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:14px}.compiler-toolbar .field{flex:1;margin:0}.compiler-toolbar .field label{font-size:12px}.compiler-actions{display:flex;align-items:center;gap:12px}.compiler-status{color:var(--muted);font-size:11px}.compiler-editor{display:block;width:100%;min-height:330px;resize:vertical;padding:16px;border:1px solid var(--line);border-radius:12px;outline:0;color:#f4eefa;background:#140f19;font:12px/1.65 Consolas,"Cascadia Code",monospace;tab-size:4}.compiler-editor:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(227,76,174,.16)}.compiler-output{min-height:140px;max-height:360px;overflow:auto;margin:13px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;color:#e7dce9;background:#140f19;font:12px/1.6 Consolas,"Cascadia Code",monospace;white-space:pre-wrap;overflow-wrap:anywhere}.compiler-output.error{color:#ff9d9d}.compiler-note{margin:11px 2px 0;color:var(--muted);font-size:10px;line-height:1.6}.primary-button:disabled{cursor:wait;opacity:.65}.empty-state{padding:24px;color:var(--muted);text-align:center;font-size:12px}
+    .faculty-skills{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}.faculty-skills li{padding:9px 12px;border:1px solid var(--line);border-radius:20px;color:var(--ink);background:var(--purple-soft);font-size:12px;font-weight:650}
+    .experiment-reference{padding:17px}.experiment-reference h3{margin:0 0 11px;font-size:13px;line-height:1.5}.experiment-reference ol{display:grid;gap:7px;margin:0 0 15px;padding-left:22px;color:var(--muted);font-size:11px;line-height:1.45}.experiment-reference a{font-size:11px}
+    .cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.content-card{padding:19px}.content-card h3{margin:14px 0 7px;font-size:15px}.content-card p{min-height:37px;margin:0 0 17px;color:var(--muted);font-size:12px;line-height:1.6}.card-kicker{color:var(--primary);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.module-card{min-height:176px}.module-card:nth-child(2) .module-number{color:#83dfbd;background:var(--mint)}.module-card:nth-child(3) .module-number{color:#ffc18b;background:var(--peach)}.module-card:nth-child(4) .module-number{color:#9fc5ff;background:var(--blue)}.module-card:nth-child(5) .module-number{color:#f3a5bf;background:var(--purple-soft)}    .module-card .module-number{margin-bottom:14px}.progress-track{height:5px;overflow:hidden;border-radius:8px;background:#3a3038}.progress-track span{display:block;height:100%;border-radius:inherit;background:var(--primary)}
+    .form-card{max-width:690px;padding:23px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.form-grid .field{margin:8px 0 12px}.project-list{display:grid;gap:12px;margin-top:19px}.project-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px}.project-row h3{margin:0 0 5px;font-size:13px}.project-row p{margin:0;color:var(--muted);font-size:11px}.project-row a{flex:0 0 auto;color:var(--primary);font-size:11px;font-weight:750;text-decoration:none}.compiler-card{margin-top:29px;padding:20px}.compiler-toolbar{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:14px}.compiler-toolbar .field{flex:1;margin:0}.compiler-toolbar .field label{font-size:12px}.compiler-actions{display:flex;align-items:center;gap:12px}.compiler-status{color:var(--muted);font-size:11px}.compiler-editor{display:block;width:100%;min-height:330px;resize:vertical;padding:16px;border:1px solid var(--line);border-radius:12px;outline:0;color:#f4eefa;background:#140f19;font:12px/1.65 Consolas,"Cascadia Code",monospace;tab-size:4}.compiler-editor:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(227,76,174,.16)}.compiler-output{min-height:140px;max-height:360px;overflow:auto;margin:13px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;color:#e7dce9;background:#140f19;font:12px/1.6 Consolas,"Cascadia Code",monospace;white-space:pre-wrap;overflow-wrap:anywhere}.compiler-output.error{color:#ff9d9d}.compiler-plot{display:block;max-width:100%;height:auto;margin:13px auto 0;border-radius:10px;background:#fff}.compiler-note{margin:11px 2px 0;color:var(--muted);font-size:10px;line-height:1.6}.primary-button:disabled{cursor:wait;opacity:.65}.empty-state{padding:24px;color:var(--muted);text-align:center;font-size:12px}
     .lab-files-section{margin-top:28px}.lab-files-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px}.lab-files-heading h2{margin:0 0 5px;font-size:16px}.lab-files-heading p{margin:0;color:var(--muted);font-size:11px}.lab-file-list{display:grid;gap:0;overflow:hidden}.lab-file-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 20px;border-bottom:1px solid var(--line)}.lab-file-row:last-child{border-bottom:0}.lab-file-name{overflow:hidden;color:var(--primary);font-size:12px;text-overflow:ellipsis;white-space:nowrap}.lab-file-actions{display:flex;flex:0 0 auto;align-items:center;gap:12px}.lab-file-size{color:var(--muted);font-size:10px}.lab-file-action{padding:4px;border:0;color:var(--primary);background:none;font-size:11px;font-weight:700}.lab-file-status{min-height:17px;margin:10px 2px 0;color:var(--muted);font-size:11px}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .tool-icon{display:grid;width:38px;height:38px;place-items:center;border-radius:11px;background:var(--blue);font-size:17px}.resource-list{display:grid;gap:10px}.resource-row{display:flex;align-items:center;gap:13px;padding:15px}.resource-row .tool-icon{width:34px;height:34px;font-size:14px}.resource-row div:nth-child(2){flex:1}.resource-row strong{display:block;margin-bottom:4px;font-size:12px}.resource-row span{color:var(--muted);font-size:10px}.resource-row a{color:var(--primary);font-size:11px;font-weight:700;text-decoration:none}
-    .chat-card{display:flex;min-height:435px;max-width:760px;flex-direction:column;overflow:hidden}.chat-head{padding:18px 20px;border-bottom:1px solid var(--line)}.chat-head strong{display:block;margin-bottom:5px;font-size:13px}.chat-head span{color:var(--muted);font-size:11px}.chat-messages{display:flex;flex:1;flex-direction:column;gap:12px;overflow:auto;padding:20px}.chat-message{max-width:82%;padding:12px 14px;border-radius:13px;background:#f3f2f9;font-size:12px;line-height:1.65}.chat-message.user{align-self:flex-end;color:white;background:var(--primary)}.chat-form{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line)}.chat-form input{min-width:0;flex:1;padding:0 13px;border:1px solid var(--line);border-radius:10px;outline:0}.chat-note{padding:0 16px 13px;color:var(--muted);font-size:10px}.mobile-menu{display:none;border:0;color:var(--ink);background:none;font-size:20px}
+    .chat-card{display:flex;min-height:435px;max-width:760px;flex-direction:column;overflow:hidden}.chat-head{padding:18px 20px;border-bottom:1px solid var(--line)}.chat-head strong{display:block;margin-bottom:5px;font-size:13px}.chat-head span{color:var(--muted);font-size:11px}.chat-messages{display:flex;flex:1;flex-direction:column;gap:12px;overflow:auto;padding:20px}.chat-message{max-width:82%;padding:12px 14px;border-radius:13px;color:#211b2a;background:#f3f2f9;font-size:12px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.chat-message.user{align-self:flex-end;color:white;background:var(--primary)}.chat-message.pending{color:#554b5e;font-style:italic}.chat-form{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line)}.chat-form input{min-width:0;flex:1;padding:0 13px;border:1px solid var(--line);border-radius:10px;outline:0;color:var(--ink);background:var(--paper)}.chat-form input::placeholder{color:var(--muted)}.chat-form input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(227,76,174,.16)}.chat-note{padding:0 16px 13px;color:var(--muted);font-size:10px}.mobile-menu{display:none;border:0;color:var(--ink);background:none;font-size:20px}
     @media(max-width:920px){.sidebar{width:218px}.main{margin-left:218px}.page{padding-right:22px;padding-left:22px}.topbar{padding:0 22px}.stats-grid{grid-template-columns:repeat(2,1fr)}.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:680px){.sidebar{width:252px;transform:translateX(-100%);transition:transform .2s ease;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.topbar{height:62px;padding:0 17px}.mobile-menu{display:block}.topbar-left{display:flex;align-items:center;gap:11px}.welcome-mini{display:none}.page{padding:25px 16px 45px}.welcome-card{min-height:175px;padding:23px}.welcome-stat{display:none}.dashboard-grid{grid-template-columns:1fr}.cards-grid{grid-template-columns:1fr}.page-heading{align-items:start}.form-grid{grid-template-columns:1fr}.profile-details{grid-template-columns:repeat(2,minmax(0,1fr))}.compiler-card{padding:14px}.compiler-toolbar{align-items:stretch;flex-direction:column}.compiler-actions{justify-content:space-between}.compiler-editor{min-height:280px}}
     .student-id-card{position:relative;align-self:start;overflow:hidden;padding:0;border:1px solid #dedede;border-radius:14px;background:#fff;box-shadow:0 12px 30px rgba(36,38,73,.12)}
@@ -112,14 +115,14 @@
         <button class="nav-button" data-page="references"><span class="nav-icon">▧</span>References</button>
         <button class="nav-button" data-page="assignments"><span class="nav-icon">☷</span>Assignments</button>
         <button class="nav-button" data-page="projects"><span class="nav-icon">⚑</span>Projects</button>
-        <button class="nav-button" data-page="quizzes"><span class="nav-icon">✓</span>Quizzes &amp; Tests</button>
         <button class="nav-button" data-page="profile"><span class="nav-icon">◉</span>Academic Profile</button>
         <button class="nav-button" data-page="tools"><span class="nav-icon">⚒</span>Tools</button>
         <button class="nav-button" data-page="ai"><span class="nav-icon">✳</span>AI model</button>
-      </nav><div class="sidebar-bottom"><strong>Keep learning.</strong><br>Your next discovery is one click away.</div>
+      </nav>
     </aside>
     <main class="main"><header class="topbar"><div class="topbar-left"><button class="mobile-menu" id="menuButton" aria-label="Open navigation">☰</button><span class="topbar-title" id="topbarTitle">Student dashboard</span></div><div class="topbar-right"><span class="welcome-mini" id="welcomeMini">Welcome to your library</span><button class="avatar" id="avatarButton" aria-label="Open profile">S</button></div></header><div class="page" id="pageContent"></div></main>
   </div>
+  <script src="projects/experiments.js"></script>
   <script>
     const modules=[
       {title:"Introduction to Data Science",description:"Data science workflow, roles, and foundations.",tag:"Foundations"},
@@ -336,38 +339,69 @@ print("Rule-based example emotion:", prediction)`}
       ]}
     ];
     const facultySections=[
-      {title:"Professional experience",details:[
-        ["Founder & CEO","Jack Sparrow Publishers Pvt Ltd · Full-time · Apr 2024–Present · California, USA; Sydney, Australia; Visakhapatnam, India · Hybrid"],
-        ["Assistant Professor","Mohan Babu University, Tirupati · Full-time · Jul 2024–Present · On-site"],
-        ["Associate Professor, CSE","Lendi Institute of Engineering and Technology · Jul 2022–Apr 2024 · Vizianagaram"],
-        ["Assistant Professor, CSE","Raghu Engineering College · Feb 2021–Jun 2022 · Visakhapatnam"],
-        ["Assistant Professor & HOD, CSE","Viswanadha Institute of Technology and Management · Jul 2018–Jan 2021 · Visakhapatnam"]
+      {title:"Introduction",details:[
+        ["About","Sambana's work and teaching span computer science, data science, artificial intelligence, network communications and emerging applications for space systems."],
+        ["Email","bosubabu.s@mbu.asia"],
+        ["Mobile no","9640641136"],
+        ["YouTube channel","Visit channel ↗"]
+      ]},
+      {title:"Skills and expertise",details:[
+        ["Skill","Artificial Intelligence"],
+        ["Skill","Block Chain"],
+        ["Skill","Space Exploration"],
+        ["Skill","Internet of Things"],
+        ["Skill","Astronomy & Astrophysics"],
+        ["Skill","Cosmology"]
+      ]},
+      {title:"Current institution",details:[
+        ["Institution","Mohan Babu University"],
+        ["Department","Computer Science and Engineering (Data Science)"],
+        ["Current position","Assistant Professor · July 2024–present"],
+        ["Faculty channel","YouTube channel ↗"]
       ]},
       {title:"Education",details:[
-        ["Doctor of Philosophy (PhD)","Computer Software Engineering · Indian Institute of Information Technology Kota · Nov 2021–Dec 2028 · Research: Quantum Artificial Intelligence for Deep Space Network Communications"],
-        ["AMIE, Section-B","Computer Science and Engineering · Institution of Engineers of India (IEI), Kolkata · 2018–2020 · CGPA: 7.82 · Completed in 3 semesters; project in Artificial Intelligence"]
+        ["Doctor of Philosophy (PhD), Computer Software Engineering","Indian Institute of Information Technology Kota · November 2021–December 2028 · Research topic: Quantum Artificial Intelligence for Deep Space Network Communications"],
+        ["AMIE, Section-B (Computer Science and Engineering)","Institution of Engineers of India (IEI), Kolkata · 2018–2020 · Grade: 7.82 CGPA · Completed within three semesters/attempts · Project: Artificial Intelligence · Activities and societies: B.Tech Computer Science and Engineering"],
+        ["Master of Technology (MTech), Computer Science and Engineering","Jawaharlal Nehru Technological University, Kakinada · 2013–2015 · Grade: 76.0% · Research area: Computer Networks and Artificial Intelligence"],
+        ["Master of Computer Applications (MCA), Computer Applications","Jawaharlal Nehru Technological University, Kakinada · 2007–2010 · Grade: 72.0% · Research area: Computer Networks"],
+        ["Bachelor of Science (BSc), Mathematics, Physics and Chemistry","Andhra University · 2004–2007 · Grade: 65.64% · Research area: Physics, with a focus on Space Physics and Cosmology"],
+        ["Online Course, Space Technology and its Applications","Indian Institute of Remote Sensing (IIRS), Indian Space Research Organisation (ISRO) · 2021"]
       ]},
-      {title:"Research, publishing & academic service",details:[
-        ["Research publications","50+ research papers (as listed: Scopus 40, SCI 4, WOS 8, UGC+ 12), 12 preprints, 6 book chapters, 1 monograph, and 1 white paper, 1 green paper, and 1 yellow paper"],
-        ["Books & course content","7 academic textbooks; course content creator for 4 Udemy courses"],
-        ["Editorial roles","Editor-in-Chief: IJRDES, IJCSER, PROSER, and LNES"],
-        ["Conferences","Organized 11 Springer international conferences and 1 national conference; editor/co-editor of 16 volumes (Springer, IEEE)"],
-        ["Speaking","16 keynote speaker engagements and 6 resource-person engagements"]
+      {title:"Experience",details:[
+        ["Founder & CEO · Full-time","Jack Sparrow Publishers Pvt Ltd · April 2024–present · California, USA; Sydney, Australia; and Visakhapatnam, Andhra Pradesh, India · Hybrid · Publications: Jack Sparrow Publishers · IJRDES · IJCSER · IJCSEAI"],
+        ["Assistant Professor · Full-time","Mohan Babu University, Tirupati · July 2024–present · On-site"],
+        ["Associate Professor of Computer Science and Engineering · Full-time","Lendi Institute of Engineering and Technology · July 2022–April 2024 · Vizianagaram, Andhra Pradesh, India · On-site"],
+        ["Assistant Professor of Computer Science and Engineering · Full-time","Raghu Engineering College · February 2021–June 2022 · Visakhapatnam, Andhra Pradesh, India"],
+        ["Assistant Professor and HOD of CSE","Viswanadha Institute of Technology and Management · July 2018–January 2021 · Visakhapatnam, Andhra Pradesh, India"],
+        ["Assistant Professor of Computer Science and Engineering · Full-time","Avanthi's Research & Technological Academy · July 2016–June 2018 · Vizianagaram, Andhra Pradesh, India"],
+        ["Assistant Professor of Computer Science and Engineering · Full-time","Simhadhri Engineering College · July 2015–June 2016 · Visakhapatnam, Andhra Pradesh, India"],
+        ["Assistant Professor of Computer Science and Engineering · Full-time","Viswanadha Institute of Technology and Management (VITAM) · August 2010–September 2013 · Visakhapatnam, Andhra Pradesh, India"]
       ]},
-      {title:"Patents, grants & recognition",details:[
-        ["IPv16","Innovator of Internet Protocol Version 16 (IPv16); Indian Patent Grant No. 573267; application No. 202141039287; PCT/IN2022/050620; WIPO publication WO2023/031952 A2"],
-        ["Other intellectual property","3 Australian patent grants; 15 Indian patent grants; 1 USA patent; 1 EU patent; 10 design patent grants; 1 trademark grant"],
-        ["Copyrights","9 Indian copyright grants and 2 USA copyright grants"],
-        ["Research funding","1 DST-SERB research grant, 2 NGO-funded research projects, 1 SEED research grant, and 1 consultancy project"],
-        ["Awards","6 international and national scientist and researcher awards; Anveshana Acharya Award"]
+      {title:"Research and academic contributions",details:[
+        ["Research papers","50+ research papers. Profile lists publications indexed across Scopus, SCI, Web of Science and UGC-listed journals."],
+        ["Research editor and conference organizer","Editor or co-editor of 16 volumes, including Springer and IEEE publications; organized 11 Springer international conferences."],
+        ["Editorial leadership and teaching content","Editor-in-Chief of IJRDES, IJCSER, PROSER and LNES; also creates online course content."],
+        ["Research recognition","Profile reports six international and national scientist and researcher awards, along with research grants and projects."]
       ]},
-      {title:"Additional information",details:[
-        ["Location","Visakhapatnam, Andhra Pradesh, India"],
-        ["TOEFL","96/120"],
-        ["Certifications","6 certifications"],
-        ["Website","https://www.bosubabu.com"]
+      {title:"Innovation and intellectual property",details:[
+        ["IPv16","The profile identifies IPv16 as a proposed next-generation internet architecture and highlights work related to scalable connectivity, IoT and deep-space communications."],
+        ["Indian patent grant","573267 · IPv16 application 202141039287"],
+        ["International PCT publication","WO2023/031952 A2 · Application PCT/IN2022/050620"],
+        ["Copyright registrations","Indian registration L-108397/2021 and US registration TXu 2-273-973 are listed in the supplied profile."]
+      ]},
+      {title:"Contact faculty",details:[
+        ["Faculty website","www.bosubabu.com"]
       ]}
     ];
+    function renderFacultySection(section){
+      const content=section.title==="Skills and expertise"
+        ?`<ul class="faculty-skills">${section.details.map(([,skill])=>`<li>${escapeHtml(skill)}</li>`).join("")}</ul>`
+        :`<dl class="profile-details">${section.details.map(([label,value])=>`<div class="profile-detail"><dt>${escapeHtml(label)}</dt><dd>${label==="Email"?`<a href="mailto:${escapeHtml(value)}" style="color:var(--primary)">${escapeHtml(value)}</a>`:label==="Mobile no"?`<a href="tel:${escapeHtml(value)}" style="color:var(--primary)">${escapeHtml(value)}</a>`:label==="Faculty website"?`<a href="https://www.bosubabu.com" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">${escapeHtml(value)} ↗</a>`:label==="YouTube channel"||label==="Faculty channel"?`<a href="https://www.youtube.com/channel/UCorRAT8rYK7bF-QM0MRNKHw" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">${escapeHtml(value)}</a>`:escapeHtml(value)}</dd></div>`).join("")}</dl>`;
+      const logo=section.title==="Current institution"
+        ?`<img src="mbu-logo.png" alt="Mohan Babu University logo" style="display:block;width:150px;max-height:70px;object-fit:contain;margin-bottom:14px;background:#fff;border-radius:4px">`
+        :"";
+      return `<section class="card profile-section"><h2>${escapeHtml(section.title)}</h2>${logo}${content}</section>`;
+    }
     const labFileDatabaseName="data-science-digital-library";
     const pageContent=document.getElementById("pageContent");
     let activeDeckIndex=-1;
@@ -483,10 +517,25 @@ self.onmessage=async({data})=>{
       runtime.setStdout({batched:text=>self.postMessage({type:"stdout",text:text+"\\n"})});
       runtime.setStderr({batched:text=>self.postMessage({type:"stderr",text:text+"\\n"})});
     }
+    if(data.code.includes("openpyxl")){
+      await runtime.loadPackage("micropip");
+      await runtime.runPythonAsync("import micropip\\nawait micropip.install('openpyxl')");
+    }
+    if(data.code.includes("matplotlib")){
+      await runtime.loadPackage("matplotlib");
+      await runtime.runPythonAsync("import matplotlib\\nmatplotlib.use('Agg')");
+    }
     self.postMessage({type:"ready"});
     const result=await runtime.runPythonAsync(data.code);
     const value=result===undefined||result===null?"":String(result);
     if(result&&typeof result.destroy==="function")result.destroy();
+    if(data.code.includes("matplotlib")){
+      const image=runtime.FS.readFile("/tmp/experiment-plot.png");
+      let binary="";
+      for(const byte of image)binary+=String.fromCharCode(byte);
+      self.postMessage({type:"plot",data:btoa(binary)});
+      runtime.FS.unlink("/tmp/experiment-plot.png");
+    }
     self.postMessage({type:"done",value});
   }catch(error){
     self.postMessage({type:"error",message:error&&error.message?error.message:String(error)});
@@ -501,25 +550,58 @@ return worker;
     }
     function bindPythonCompiler(){
       const selector=document.getElementById("pythonExperiment");
+      const sectionSelector=document.getElementById("pythonSection");
       const editor=document.getElementById("pythonEditor");
       const output=document.getElementById("pythonOutput");
+      const plot=document.getElementById("pythonPlot");
       const status=document.getElementById("pythonStatus");
       const runButton=document.getElementById("runPythonButton");
       const resetButton=document.getElementById("resetPythonButton");
+      const sourceLink=document.getElementById("experimentSource");
       const setOutput=(text,isError=false)=>{
         output.textContent=text;
         output.classList.toggle("error",isError);
+      };
+      const clearPlot=()=>{
+        plot.removeAttribute("src");
+        plot.hidden=true;
+      };
+      const selectedCode=()=>{
+        const selected=selector.selectedOptions[0];
+        if(selected.dataset.courseIndex!==undefined){
+          const experiment=window.courseExperiments[Number(selected.dataset.courseIndex)];
+          return experiment.sections[Number(sectionSelector.value)].code;
+        }
+        return pythonExperiments[Number(selected.dataset.sampleIndex)].code;
+      };
+      const updateSelection=()=>{
+        const selected=selector.selectedOptions[0];
+        const isCourse=selected.dataset.courseIndex!==undefined;
+        sectionSelector.closest(".field").classList.toggle("hidden",!isCourse);
+        sourceLink.classList.toggle("hidden",!isCourse);
+        if(isCourse){
+          const experiment=window.courseExperiments[Number(selected.dataset.courseIndex)];
+          sectionSelector.innerHTML=experiment.sections.map((section,index)=>`<option value="${index}">${String.fromCharCode(65+index)} · ${escapeHtml(section.title)}</option>`).join("");
+          sourceLink.href=`projects/experiments/${escapeHtml(experiment.file)}`;
+          sourceLink.download=experiment.file;
+        }
+        editor.value=selectedCode();
+        clearPlot();
+        setOutput("Select Run Python to execute this example.");
       };
       const finishRun=()=>{
         window.clearTimeout(pythonRunTimer);
         pythonRunTimer=null;
         runButton.disabled=false;
       };
-      selector.addEventListener("change",()=>{editor.value=pythonExperiments[Number(selector.value)].code;setOutput("Select Run Python to execute this example.");});
-      resetButton.addEventListener("click",()=>{editor.value=pythonExperiments[Number(selector.value)].code;});
+      selector.addEventListener("change",updateSelection);
+      sectionSelector.addEventListener("change",()=>{editor.value=selectedCode();clearPlot();setOutput("Select Run Python to execute this section.");});
+      resetButton.addEventListener("click",()=>{editor.value=selectedCode();});
+      updateSelection();
       runButton.addEventListener("click",()=>{
         if(pythonRunTimer!==null)window.clearTimeout(pythonRunTimer);
         runButton.disabled=true;
+        clearPlot();
         setOutput("");
         status.textContent="Starting Python runtime…";
         try{
@@ -542,6 +624,9 @@ return worker;
                 output.textContent+=message.text;
                 output.scrollTop=output.scrollHeight;
                 if(message.type==="stderr")output.classList.add("error");
+              }else if(message.type==="plot"){
+                plot.src=`data:image/png;base64,${message.data}`;
+                plot.hidden=false;
               }else if(message.type==="done"){
                 if(message.value)output.textContent+=`${output.textContent?"\\n":""}${message.value}`;
                 if(!output.textContent)output.textContent="Code finished without printed output.";
@@ -688,9 +773,9 @@ return worker;
         const moduleTitle=modules[activeModuleNumber-1].title;
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Module ${activeModuleNumber} · ${escapeHtml(modules[activeModuleNumber-1].tag)}</span><h1>${escapeHtml(moduleTitle)}</h1><p>Choose a presentation to read as an open, page-turning notebook.</p></div><button class="text-button" data-goto="modules">← Back to modules</button></div><div class="flipbook-decks">${deckList.map((deck,index)=>`<article class="card flipbook-deck"><div class="flipbook-icon" aria-hidden="true">▤</div><h2>${escapeHtml(deck.title)}</h2><p>${deck.slides} pages</p><button class="primary-button" data-deck-index="${index}">Open notebook</button>${deck.sourceDoc?`<div class="flipbook-source-links"><a class="text-button" href="modules/module-${activeModuleNumber}/${escapeHtml(deck.sourcePdf)}" target="_blank" rel="noopener noreferrer">Open PDF</a><a class="text-button" href="modules/module-${activeModuleNumber}/${escapeHtml(deck.sourceDoc)}" download>Download DOCX</a></div>`:""}</article>`).join("")}</div><section class="card flipbook-viewer" id="flipbookViewer" hidden><div class="flipbook-toolbar"><strong id="flipbookTitle"></strong><button class="text-button" data-close-flipbook>Choose another presentation</button></div><div class="flipbook-stage"><button class="flipbook-arrow" id="previousSlide" data-flip="-1" aria-label="Previous spread">‹</button><div class="notebook-spread" id="notebookSpread"><div class="notebook-leaf"><img id="leftNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · MODULE ${activeModuleNumber}</span><span id="leftPageNumber"></span></span></div><div class="notebook-leaf" id="rightNotebookLeaf"><img id="rightNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · MODULE ${activeModuleNumber}</span><span id="rightPageNumber"></span></span></div></div><button class="flipbook-arrow" id="nextSlide" data-flip="1" aria-label="Next spread">›</button></div><div class="flipbook-controls"><button class="primary-button" id="previousSlideButton" data-flip="-1">← Previous spread</button><span class="flipbook-count" id="flipbookCount" aria-live="polite"></span><button class="primary-button" id="nextSlideButton" data-flip="1">Next spread →</button></div></section>`;
       }else if(page==="labs"||page==="lab-experiments"){
-        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Faculty profile</span><h1>Data Science Faculty</h1><p>Academic, research, professional, and intellectual-property highlights.</p></div></div><section class="card profile-section" style="margin-bottom:16px"><div class="profile-head faculty-profile-head"><div class="avatar"><img src="faculty-photo.jpe" alt="Bosubabu Sambana"></div><div><strong>Bosubabu Sambana</strong><span>Innovator of Internet Protocol Version 16 (IPv16) · Computer Scientist</span></div></div><p style="margin:15px 0 10px;color:var(--muted);font-size:12px;line-height:1.7">Assistant Professor at Mohan Babu University and Founder &amp; CEO of Jack Sparrow Publishers Pvt Ltd. His academic and professional interests include computer science, research, publishing, and next-generation internet architecture.</p><a class="text-button" href="https://www.bosubabu.com" target="_blank" rel="noopener noreferrer">Visit faculty website ↗</a></section><div class="profile-sections">${facultySections.map((section)=>`<section class="card profile-section"><h2>${escapeHtml(section.title)}</h2><dl class="profile-details">${section.details.map(([label,value])=>`<div class="profile-detail"><dt>${escapeHtml(label)}</dt><dd>${label==="Website"?`<a href="${escapeHtml(value)}" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">${escapeHtml(value)}</a>`:escapeHtml(value)}</dd></div>`).join("")}</dl></section>`).join("")}</div>`;
+        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">MBU · DATA SCIENCE</span><h1>Data Science Faculty</h1><p>Faculty profile, academic background and research interests.</p></div></div><section class="card profile-section" style="margin-bottom:16px"><div class="profile-head faculty-profile-head"><div class="avatar"><img src="faculty-photo.jpe" alt="Bosubabu Sambana"></div><div><strong>Bosubabu Sambana</strong><span>Assistant Professor, Computer Science and Engineering · Mohan Babu University</span></div></div><p style="margin:15px 0 10px;color:var(--muted);font-size:12px;line-height:1.7">Computer scientist and innovator of Internet Protocol Version 16 (IPv16).</p><p style="margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.7">Bosubabu Sambana with Dr. A. P. J. Abdul Kalam</p><a class="text-button" href="mailto:bosubabu.s@mbu.asia">Email faculty ↗</a><a class="text-button" href="https://www.bosubabu.com" target="_blank" rel="noopener noreferrer" style="margin-left:16px">Visit faculty website ↗</a></section><div class="profile-sections">${facultySections.map(renderFacultySection).join("")}<p class="muted" style="font-size:11px;line-height:1.6">Academic and career details are presented as provided and should be verified with the university or official records.</p><footer class="muted" style="padding:8px 0;font-size:11px">Mohan Babu University · Digital Library<br>Learning starts here.</footer></div>`;
       }else if(page==="projects"){
-        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Interactive learning</span><h1>Projects</h1><p>Run and edit your data science experiments in the live Python compiler.</p></div></div><section class="card compiler-card"><div class="compiler-toolbar"><div class="field"><label for="pythonExperiment">Choose an experiment</label><select id="pythonExperiment">${pythonExperiments.map((experiment,index)=>`<option value="${index}">${escapeHtml(experiment.title)}</option>`).join("")}</select></div><div class="compiler-actions"><span class="compiler-status" id="pythonStatus" aria-live="polite">First run loads Python, NumPy, pandas, and SQLite (internet required).</span><button class="primary-button" id="runPythonButton" type="button">▶ Run Python</button></div></div><label class="eyebrow" for="pythonEditor">Python code</label><textarea class="compiler-editor" id="pythonEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code editor">${escapeHtml(pythonExperiments[0].code)}</textarea><div class="compiler-actions" style="justify-content:flex-end;margin-top:12px"><button class="text-button" id="resetPythonButton" type="button">Reset example</button></div><pre class="compiler-output" id="pythonOutput" aria-label="Python output" aria-live="polite">Select Run Python to execute this example.</pre><p class="compiler-note">Python runs in your browser. The runtime and data-science packages are downloaded from the public Pyodide CDN on the first run. Code and output stay in this browser; this is a learning compiler, not a full server-backed notebook.</p></section>`;
+        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Interactive learning</span><h1>Projects</h1><p>Explore ten experiments, choose an A/B/C section, and run its Python code in your browser.</p></div></div><section class="profile-section"><h2>Data Science experiments</h2><div class="cards-grid">${window.courseExperiments.map((experiment,index)=>`<article class="card experiment-reference"><h3>Experiment ${index+1}: ${escapeHtml(experiment.title)}</h3><ol>${experiment.sections.map((section,sectionIndex)=>`<li>${String.fromCharCode(65+sectionIndex)}. ${escapeHtml(section.title)}</li>`).join("")}</ol><a class="text-button" href="projects/experiments/${escapeHtml(experiment.file)}" download="${escapeHtml(experiment.file)}">Download Experiment ${index+1} document</a></article>`).join("")}</div></section><section class="card compiler-card"><div class="compiler-toolbar"><div class="field"><label for="pythonExperiment">Choose experiment or example</label><select id="pythonExperiment"><optgroup label="Data Science experiments">${window.courseExperiments.map((experiment,index)=>`<option value="course-${index}" data-course-index="${index}">Experiment ${index+1} · ${escapeHtml(experiment.title)}</option>`).join("")}</optgroup><optgroup label="Quick examples">${pythonExperiments.map((experiment,index)=>`<option value="sample-${index}" data-sample-index="${index}">${escapeHtml(experiment.title)}</option>`).join("")}</optgroup></select></div><div class="field"><label for="pythonSection">Experiment section</label><select id="pythonSection"></select></div><div class="compiler-actions"><span class="compiler-status" id="pythonStatus" aria-live="polite">First run loads Python and data-science packages (internet required).</span><button class="primary-button" id="runPythonButton" type="button">▶ Run Python</button></div></div><label class="eyebrow" for="pythonEditor">Python code</label><textarea class="compiler-editor" id="pythonEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code editor">${escapeHtml(window.courseExperiments[0].sections[0].code)}</textarea><div class="compiler-actions" style="justify-content:flex-end;margin-top:12px"><a class="text-button" id="experimentSource" href="projects/experiments/Experiment-1.docx" download="Experiment-1.docx">Download source document</a><button class="text-button" id="resetPythonButton" type="button">Reset section</button></div><pre class="compiler-output" id="pythonOutput" aria-label="Python output" aria-live="polite">Select Run Python to execute this section.</pre><img class="compiler-plot" id="pythonPlot" alt="Python-generated experiment chart" hidden><p class="compiler-note">Python runs in your browser using Pyodide. The first run downloads the runtime and required packages; an internet connection is needed. Experiment programs use sample data. The review example parses sample HTML only and does not access Amazon or other websites.</p></section>`;
         bindPythonCompiler();
       }else if(page==="assignments"){
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Coursework</span><h1>Assignments</h1><p>Open or download assignment PDFs for your data science modules.</p></div></div><div class="flipbook-decks">${assignments.map((assignment,index)=>`<article class="card flipbook-deck"><div class="flipbook-icon" aria-hidden="true">▤</div><h2>${escapeHtml(assignment.title)}</h2><p>${assignment.slides} pages · PDF</p><button class="primary-button" data-assignment-index="${index}">Open notebook</button><div class="flipbook-source-links"><a class="text-button" href="assignments/${escapeHtml(assignment.file)}" download>Download PDF</a></div></article>`).join("")}</div><section class="card flipbook-viewer" id="flipbookViewer" hidden><div class="flipbook-toolbar"><strong id="flipbookTitle"></strong><button class="text-button" data-close-flipbook>Choose another assignment</button></div><div class="flipbook-stage"><button class="flipbook-arrow" id="previousSlide" data-flip="-1" aria-label="Previous spread">‹</button><div class="notebook-spread" id="notebookSpread"><div class="notebook-leaf"><img id="leftNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · ASSIGNMENT</span><span id="leftPageNumber"></span></span></div><div class="notebook-leaf" id="rightNotebookLeaf"><img id="rightNotebookPage" alt=""><span class="notebook-page-number"><span class="notebook-page-label">DATA SCIENCE · ASSIGNMENT</span><span id="rightPageNumber"></span></span></div></div><button class="flipbook-arrow" id="nextSlide" data-flip="1" aria-label="Next spread">›</button></div><div class="flipbook-controls"><button class="primary-button" id="previousSlideButton" data-flip="-1">← Previous spread</button><span class="flipbook-count" id="flipbookCount" aria-live="polite"></span><button class="primary-button" id="nextSlideButton" data-flip="1">Next spread →</button></div></section>`;
@@ -701,13 +786,69 @@ return worker;
       }else if(page==="resources"||page==="references"){
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Keep exploring</span><h1>References</h1><p>Trusted guides and references to support your data science journey.</p></div></div><div class="resource-list">${resources.map((resource)=>`<article class="card resource-row"><div class="tool-icon">${resource.icon}</div><div><strong>${escapeHtml(resource.title)}</strong><span>${escapeHtml(resource.type)}</span></div><a href="${escapeHtml(resource.url)}" target="_blank" rel="noopener noreferrer">Open ↗</a></article>`).join("")}</div>`;
       }else if(page==="ai"){
-        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Ask, learn, practice</span><h1>AI study assistant</h1><p>Try a sample prompt to get a quick study tip.</p></div></div><section class="card chat-card"><div class="chat-head"><strong>✳ Data science study assistant</strong><span>Learning demo · sample replies, not connected to an AI service</span></div><div class="chat-messages" id="chatMessages"><div class="chat-message">Hi ${escapeHtml(state.name)}! Ask me a data science question. This demo can help with a few introductory topics.</div></div><form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Try: What is data cleaning?" aria-label="Ask a study question" required><button class="primary-button" type="submit">Ask</button></form><div class="chat-note">This sample assistant uses preset answers. Connect an AI service to enable real model responses.</div></section>`;
+        pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Ask, learn, practice</span><h1>AI study assistant</h1><p>Ask questions and get responses from the OpenAI-powered assistant.</p></div></div><section class="card chat-card"><div class="chat-head"><strong>✳ Data science study assistant</strong><span>AI-powered answers · avoid sharing private or sensitive information</span></div><div class="chat-messages" id="chatMessages" aria-live="polite"><div class="chat-message">Hi ${escapeHtml(state.name)}! Ask me a question about data science or any other topic.</div></div><form class="chat-form" id="chatForm"><input id="chatInput" maxlength="4000" placeholder="Ask anything..." aria-label="Ask a question" autocomplete="off" required><button class="primary-button" id="chatSubmit" type="submit">Ask</button></form><div class="chat-note" id="chatStatus">The secure AI backend must be deployed and configured to answer questions.</div></section>`;
         document.getElementById("chatForm").addEventListener("submit",(event)=>{
-          event.preventDefault();const input=document.getElementById("chatInput");const question=input.value.trim();if(!question)return;const messages=document.getElementById("chatMessages");
-          const userMessage=document.createElement("div");userMessage.className="chat-message user";userMessage.textContent=question;messages.append(userMessage);
-          const answer=document.createElement("div");answer.className="chat-message";
-          answer.textContent=/clean|prepar/i.test(question)?"Data cleaning is the process of fixing or removing inaccurate, incomplete, duplicate, or inconsistent data. A typical workflow is to inspect missing values, correct data types, remove duplicates, and validate the result.":/machine learning|model/i.test(question)?"Machine learning uses data to train a model to identify patterns and make predictions. Start by defining the problem, splitting data into training and test sets, fitting a model, and evaluating it on data it has not seen.":"Start by breaking the topic into a question you can answer with data. Explore your dataset, check its quality, summarize important variables, and explain what you find. This demo has sample answers for data cleaning and machine learning.";
-          messages.append(answer);input.value="";messages.scrollTop=messages.scrollHeight;
+          event.preventDefault();
+          const input=document.getElementById("chatInput");
+          const submit=document.getElementById("chatSubmit");
+          const status=document.getElementById("chatStatus");
+          const messages=document.getElementById("chatMessages");
+          const question=input.value.trim();
+          if(!question)return;
+          const endpoint=document.querySelector('meta[name="ai-api-url"]').content.trim()||
+            (location.protocol==="file:"||location.hostname.endsWith(".github.io")?"":"/api/chat");
+          const appendMessage=(text,className="chat-message")=>{
+            const message=document.createElement("div");
+            message.className=className;
+            message.textContent=text;
+            messages.append(message);
+            messages.scrollTop=messages.scrollHeight;
+            return message;
+          };
+          appendMessage(question,"chat-message user");
+          input.value="";
+          input.disabled=true;
+          submit.disabled=true;
+          status.textContent="Waiting for the AI assistant…";
+          const pending=appendMessage("Thinking…","chat-message pending");
+          const conversation=[...messages.querySelectorAll(".chat-message:not(.pending)")].slice(-12)
+            .filter((message)=>!message.classList.contains("error"))
+            .map((message)=>({role:message.classList.contains("user")?"user":"assistant",content:message.textContent}));
+          while(conversation.length>1&&conversation.reduce((total,message)=>total+message.content.length,0)>12000){
+            conversation.shift();
+          }
+          if(!endpoint){
+            pending.remove();
+            const error=appendMessage("The AI backend is not configured for this GitHub Pages site yet. Deploy the Vercel backend, then set the ai-api-url meta tag in index.html to its /api/chat URL.","chat-message error");
+            error.setAttribute("role","alert");
+            status.textContent="Backend configuration required.";
+            input.disabled=false;
+            submit.disabled=false;
+            input.focus();
+            return;
+          }
+          fetch(endpoint,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({messages:conversation})
+          }).then(async(response)=>{
+            let result;
+            try{result=await response.json()}catch{throw new Error("The AI backend returned an invalid response.")}
+            if(!response.ok)throw new Error(result.error||"The AI assistant could not answer. Please try again.");
+            if(typeof result.reply!=="string"||!result.reply.trim())throw new Error("The AI assistant returned an empty answer. Please try again.");
+            pending.textContent=result.reply.trim();
+            pending.classList.remove("pending");
+            status.textContent="Answer generated by the AI assistant.";
+          }).catch((error)=>{
+            pending.remove();
+            const message=appendMessage(error.message||"Could not connect to the AI assistant. Please try again.","chat-message error");
+            message.setAttribute("role","alert");
+            status.textContent="The AI request failed.";
+          }).finally(()=>{
+            input.disabled=false;
+            submit.disabled=false;
+            input.focus();
+          });
         });
       }else if(page==="profile"){
         pageContent.innerHTML=`<div class="page-heading"><div><span class="eyebrow">Student records</span><h1>Academic Profile</h1><p>Academic and personal information for ${escapeHtml(state.name)}.</p></div></div><div class="profile-sections">${academicProfileSections.map((section)=>`<section class="card profile-section"><h2>${section.title}</h2><dl class="profile-details">${section.details.map(([label,value])=>`<div class="profile-detail"><dt>${escapeHtml(label)}</dt><dd>${label==="Student status"?value:escapeHtml(value)}</dd></div>`).join("")}</dl></section>`).join("")}</div>`;
