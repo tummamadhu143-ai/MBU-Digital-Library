@@ -8,7 +8,7 @@
   <title>Data Science Digital Library</title>
   <style>
     :root{color-scheme:dark;--ink:#f5eef8;--muted:#b9aabd;--line:#44314f;--paper:#23172d;--canvas:#17101f;--primary:#e34cae;--primary-dark:#c53891;--purple-soft:#382044;--mint:#30203b;--peach:#3d2238;--blue:#28223f;--olive:#e27ab8;--shadow:0 20px 60px rgba(0,0,0,.28);font-family:Inter,"Segoe UI",Arial,sans-serif}
-    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--canvas)}button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.eyebrow{color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.muted{color:var(--muted)}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--canvas)}body:before{position:fixed;z-index:-1;inset:0;background:linear-gradient(rgba(23,16,31,.72),rgba(23,16,31,.84)),url("mbu-campus-background.png") center/cover no-repeat;content:"";pointer-events:none}button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}.eyebrow{color:var(--primary);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.muted{color:var(--muted)}
     .brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:750;letter-spacing:.01em}.brand-copy{display:grid;gap:3px}.brand-copy strong{font-size:13px;line-height:1.2}.brand-copy small{color:var(--muted);font-size:9px;font-weight:500;line-height:1.35}.brand-mark{display:block;width:78px;height:auto;max-height:48px;flex:0 0 auto;object-fit:contain;border-radius:4px;background:#fff}
     .field{display:grid;gap:8px;margin:17px 0}.field label{font-size:13px;font-weight:700}.field input,.field select,.field textarea{width:100%;min-height:46px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;outline:0;color:var(--ink);background:var(--paper)}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(227,76,174,.2)}
     .primary-button{display:inline-flex;min-height:45px;align-items:center;justify-content:center;gap:8px;padding:0 18px;border:0;border-radius:11px;color:white;background:var(--primary);font-weight:750;transition:background .2s,transform .2s}.primary-button:hover{transform:translateY(-1px);background:var(--primary-dark)}
@@ -108,7 +108,6 @@
       <div class="brand"><img class="brand-mark" src="mbu-logo.png" alt="Mohan Babu University"><span class="brand-copy"><strong>Digital Library</strong><small>DATA SCIENCE</small></span></div><div class="side-label">Student Library</div>
       <nav class="nav-list" aria-label="Main navigation">
         <button class="nav-button active" data-page="home"><span class="nav-icon">⌂</span>Home</button>
-        <button class="nav-button" data-page="my-learning"><span class="nav-icon">◷</span>My Learning</button>
         <button class="nav-button" data-page="modules"><span class="nav-icon">▦</span>Modules</button>
         <button class="nav-button" data-page="lab-experiments"><span class="nav-icon">⌘</span>Data Science Faculty</button>
         <button class="nav-button" data-page="study-materials"><span class="nav-icon">▤</span>Study Materials</button>
